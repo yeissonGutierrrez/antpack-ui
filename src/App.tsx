@@ -1,24 +1,34 @@
+
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, ThemeProvider } from '@mui/system';
+import Login from './components/Login';
+import Register from './components/Register';
+import { unstable_createMuiStrictModeTheme } from '@mui/material';
+
+const theme = unstable_createMuiStrictModeTheme({
+  palette: {
+      primary: {
+      light: '#00ff00',
+      main: '#00ff00',
+      dark: '#002884',
+      contrastText: '#fff',
+      },
+      secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+      },
+  },
+  });
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <Login/>
+        {/* <Register/> */}
+      </ThemeProvider>
     </div>
   );
 }

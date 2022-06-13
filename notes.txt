@@ -1,0 +1,51 @@
+
+guia para creacion de color personalizable 
+
+    const theme = createTheme({
+    palette: {
+        primary: {
+        light: '#757ce8',
+        main: '#3f50b5',
+        dark: '#002884',
+        contrastText: '#fff',
+        },
+        secondary: {
+        light: '#ff7961',
+        main: '#f44336',
+        dark: '#ba000d',
+        contrastText: '#000',
+        },
+    },
+    });
+
+
+Botton 
+    variante = contained
+
+input
+    Label = outlined
+
+select 
+    example =   <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
+                        value={age}
+                        onChange={handleChange}
+                    >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                </FormControl>
+
+Checkbox
+    Size: sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+
+
+
+
