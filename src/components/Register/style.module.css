@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid red; */
+    /* width: 100%; */
+
+    width: 700px;
+
+    padding: 1rem 0 ;
+}
