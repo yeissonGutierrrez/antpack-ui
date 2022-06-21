@@ -22,6 +22,9 @@ const theme = unstable_createMuiStrictModeTheme({
   },
 });
 
+
+const emailRex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
 function App() {
   return (
     <div className="App">
@@ -38,7 +41,7 @@ function App() {
               name: "email",
               type: "email",
               required: true,
-              validation: yup.string().required("Email requerido"),
+              validation: yup.string().matches(emailRex, 'Email no valido').required("Email requerido"),
             },
             {
               label: "Contraseña",

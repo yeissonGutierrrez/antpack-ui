@@ -8,8 +8,6 @@ import type { AnySchema } from "yup";
 import styles from "./style.module.css";
 
 
-    const emailRex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
     // const schema = yup.object({
     //     email: yup.string().matches( emailRex, 'debe ser caracter valido').required('hola esto es requerido'),
     // }).required();
