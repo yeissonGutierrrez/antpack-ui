@@ -36,6 +36,7 @@ interface RegisterProps {
   }
 }
 
+
 const Register = ({
   inputs = [],
   onSubmitForm = (data) => { console.log(data) },
