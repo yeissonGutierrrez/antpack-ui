@@ -1,11 +1,10 @@
 import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Checkbox, Grid, MenuItem, TextField } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormHelperText from '@mui/material/FormHelperText';
 
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import type { AnySchema } from "yup";
 
 import styles from "./style.module.css";
@@ -29,8 +28,12 @@ interface RegisterProps {
   requiredTermsAndConditions?: boolean;
 
   xs?: number;
-  termsAndConditionsText?: string
-  btnSubmitText?: string
+  termsAndConditionsText?: string;
+  btnSubmitText?: string;
+  containerProps?: {
+    rowSpacing?: number
+    columnSpacing?: number
+  }
 }
 
 const Register = ({
@@ -39,9 +42,14 @@ const Register = ({
   requiredTermsAndConditions = true,
   xs=6,
   termsAndConditionsText = "Acepto los terminos y condiciones",
-  btnSubmitText = "Registrarse"
+  btnSubmitText = "Registrarse",
+  containerProps = {
+    columnSpacing: 2,
+    rowSpacing: 2
+  },
 }: RegisterProps) => {
 
+  const { rowSpacing = 2, columnSpacing = 2 } = containerProps!
 
   const inputsSchemas = inputs.reduce((acc, inputData) => {
     return {
@@ -50,20 +58,18 @@ const Register = ({
     };
   }, {
     // si require que se acepten terminos y condiones, se deben validar mediante react hook forms 
-    termsAndConditions: requiredTermsAndConditions ?  yup.boolean().oneOf([true]).required() : yup.boolean()
+    termsAndConditions: requiredTermsAndConditions ? yup.boolean().oneOf([true]).required() : yup.boolean()
   })
 
   const validationSchema = yup.object({
     ...inputsSchemas,
   });
 
-  // console.log(validationSchema)
 
-  const { handleSubmit, formState, control, setValue, getValues  } = useForm({
+  const { handleSubmit, formState, control, setValue,  } = useForm({
     resolver: yupResolver(validationSchema!),
   });
 
-  // const { _formValues  } = control
   const { errors,  } = formState;
 
   const onSubmit = handleSubmit((data) => {
@@ -73,7 +79,7 @@ const Register = ({
     return (
       <div className={styles.container}>
         <form onSubmit={onSubmit}>
-          <Grid container rowSpacing={2} columnSpacing={2}>
+          <Grid container rowSpacing={rowSpacing} columnSpacing={columnSpacing}>
             {inputs.map((input, inputIndex) => {
               const { label, name: nameData, type, required, defaulValue, options = [] } = input;
               const isSelect = options.length > 0
@@ -157,9 +163,12 @@ const Register = ({
                 </Button>
               </div>
             </Grid>
-            {
-              JSON.stringify(getValues(), null, 2)
-            }
+            {/* {
+              JSON.stringify({
+                rowSpacing,
+                columnSpacing
+              }, null, 2)
+            } */}
           </Grid>
         </form>
       </div>
