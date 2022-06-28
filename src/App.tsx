@@ -22,41 +22,33 @@ const theme = unstable_createMuiStrictModeTheme({
   },
 });
 
+
+const emailRex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
 function App() {
   return (
     <div className="App">
       <>
-        <Register
-          containerProps={{
-            rowSpacing: 4,
-            columnSpacing: 4
-          }}
-          xs={6}
+        <Login
+          xs={12}
           onSubmitForm={(d) => {
             alert(JSON.stringify(d, null, 2))
           }}
-          requiredTermsAndConditions={false}
-          btnSubmitText={"Cambiar"}
+          btnSubmitText={"Cambiar contraseña"}
           inputs={[
             {
-              label: "Nueva Contraseña",
-              name: "password",
-              type: "password",
+              label: "Email",
+              name: "email",
+              type: "email",
               required: true,
-              validation: yup.string().required(),
+              validation: yup.string().matches(emailRex, 'Email no valido').required("Email requerido"),
             },
             {
-              label: "Confirmar contraseña",
-              name: "confirmPassword",
+              label: "Contraseña",
+              name: "Password",
               type: "password",
               required: true,
-              validation: yup
-                .string()
-                .required()
-                .oneOf(
-                  [yup.ref("password"), null],
-                  "Las contraseñas deben coincidir"
-                ),
+              validation: yup.string().required("Contraseña requerida"),
             },
           ]}
         />
